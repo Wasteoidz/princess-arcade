@@ -1,10 +1,9 @@
 <script setup>
 const game = useGameStore()
 
-// Keep this super simple: just update the state mode configuration when clicked
 function setMode(modeName) {
   game.currentMode = modeName
-  game.generateProblem() // Prep the numbers before she lands on the arena page
+  game.generateProblem()
 }
 </script>
 

@@ -3,7 +3,6 @@ import confetti from 'canvas-confetti'
 
 const game = useGameStore()
 
-// Trigger the explosion whenever she wins
 watch(() => game.isCorrect, (newVal) => {
   if (newVal === true) {
     confetti({
@@ -129,7 +128,6 @@ button {
   touch-action: manipulation;
 }
 
-/* 🦄 Unicorn Animation States */
 .animate-unicorn-idle {
   animation: unicornFloat 3s ease-in-out infinite;
 }
@@ -156,7 +154,6 @@ button {
   40%, 80% { transform: translateX(10px); }
 }
 
-/* 🌸✨ Block Item Spin Explosion */
 .animate-item-celebrate {
   animation: itemPopUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards;
 }
@@ -173,7 +170,6 @@ button {
   100% { transform: rotate(360deg); }
 }
 
-/* 👑 Score Badge Heartbeat */
 .animate-score-pop {
   animation: scoreHeartbeat 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
 }
