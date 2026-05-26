@@ -79,7 +79,7 @@ watch(() => game.isCorrect, (newVal) => {
           class="text-3xl md:text-5xl font-black text-pink-400"
           :class="{ 'animate-spin-slow': game.isCorrect === true }"
         >
-          ➕
+          {{ game.operator }}
         </div>
 
         <div class="flex items-center justify-center gap-3 md:gap-5 flex-wrap min-h-[50px] md:min-h-[75px]">
