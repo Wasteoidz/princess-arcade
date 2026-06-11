@@ -53,7 +53,7 @@ export const useUnicornMathStore = defineStore('unicornMath', () => {
     if (chosen === correctTarget) {
       score.value++
       isCorrect.value = true
-      setTimeout(() => generateProblem(), 1500)
+      setTimeout(() => generateProblem(), 2500)
     }
     else {
       isCorrect.value = false
