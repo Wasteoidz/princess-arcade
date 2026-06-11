@@ -42,25 +42,24 @@ function setMode(modeName) {
         </div>
       </NuxtLink>
 
-      <!-- GAME 2: Placeholder for our next creation -->
-      <div
-        class="group text-left p-5 bg-white/60 border-2 border-dashed border-purple-200 rounded-3xl shadow-none flex items-center gap-4 relative overflow-hidden"
+      <!-- GAME 2: Magical Word Builder -->
+      <NuxtLink
+        to="/spelling-game"
+        class="group text-left p-5 bg-white hover:bg-purple-50 border-2 border-purple-200 rounded-3xl shadow-sm hover:shadow-md active:scale-95 transition-all duration-150 flex items-center gap-4"
       >
-        <!-- Sparkle accents to make the placeholder look intriguing -->
-        <span class="text-4xl md:text-5xl filter drop-shadow-sm opacity-50 group-hover:scale-110 transition-transform">✨</span>
+        <span class="text-4xl md:text-5xl filter drop-shadow-sm group-hover:animate-bounce">✍️</span>
         <div>
           <div class="flex items-center gap-2">
-            <h2 class="text-xl md:text-2xl font-black text-purple-300">
-              Game 2 Box
+            <h2 class="text-xl md:text-2xl font-black text-purple-500">
+              Letter Magic
             </h2>
-            <span class="text-xs font-bold px-2 py-0.5 bg-purple-50 text-purple-400 rounded-full">Coded Soon</span>
+            <span class="text-xs font-bold px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full">Aktiv</span>
           </div>
-          <p class="text-xs md:text-sm text-slate-400 mt-1">
-            A brand new magical math game is arriving here today!
+          <p class="text-xs md:text-sm text-slate-500 mt-1">
+            Spell cute Norwegian words and unlock sparkly points blocks!
           </p>
         </div>
-      </div>
-
+      </NuxtLink>
       <!-- MYSTERY SLOT -->
       <div class="opacity-40 p-5 bg-slate-100 border-2 border-dashed border-slate-300 rounded-3xl flex items-center gap-4 cursor-not-allowed">
         <span class="text-4xl md:text-5xl filter grayscale">🔒</span>
