@@ -209,13 +209,13 @@ watch(() => game.isCorrect, (newVal) => {
               v-if="game.isCorrect === true"
               class="text-emerald-600 block drop-shadow-sm"
             >
-              Magical! The unicorn loves it! 💖
+              Kjempebra! Du er super! 💖
             </span>
             <span
               v-else-if="game.isCorrect === false"
               class="text-rose-600 block max-w-xs md:max-w-xl drop-shadow-sm"
             >
-              Oops! {{ game.lastChosen }} is not correct. Count them and try again!
+              Oops! {{ game.lastChosen }} er vist feil. Tell dem og prøv igjen!
             </span>
           </div>
         </div>

@@ -38,7 +38,7 @@ watch(() => game.isCorrect, (newVal) => {
         ◀ Menu
       </NuxtLink>
 
-      <span class="font-black text-purple-600 tracking-wide text-base md:text-2xl">Bokstavmagi ✨</span>
+      <span class="font-black text-purple-600 tracking-wide text-base md:text-2xl"> Bokstavmagi </span>
 
       <span
         class="text-amber-500 bg-white px-3 py-1 md:px-5 md:py-1.5 rounded-2xl shadow-sm border border-amber-100 transition-all duration-300"
