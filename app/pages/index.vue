@@ -1,5 +1,5 @@
 <script setup>
-const game = useGameStore()
+const game = useUnicornMathStore()
 
 // Sets up the game parameters right before navigating
 function setMode(modeName) {
@@ -77,7 +77,7 @@ function setMode(modeName) {
 
     <!-- Global Score Display -->
     <div class="mt-8 md:mt-12 text-sm md:text-base font-bold text-purple-500 bg-white/80 border border-purple-200/50 px-6 py-2 rounded-full shadow-sm">
-      Total High Score Bank: <span class="text-amber-500">👑 {{ game.score }}</span>
+      Total High Score: <span class="text-amber-500">👑 {{ game.score }}</span>
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useGameStore = defineStore('game', () => {
+export const useUnicornMathStore = defineStore('unicornMath', () => {
   const currentMode = ref<string>('easy-addition')
   const operator = ref<string>('➕')
   const num1 = ref<number>(3)

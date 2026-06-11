@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import confetti from 'canvas-confetti'
 
-const game = useGameStore()
+const game = useUnicornMathStore()
 const isChoosingMode = ref(true) // Starts true so she selects difficulty first
 
 function selectModeAndStart(modeName) {
