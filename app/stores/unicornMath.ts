@@ -16,18 +16,18 @@ export const useUnicornMathStore = defineStore('unicornMath', () => {
     lastChosen.value = null
 
     if (currentMode.value === 'easy-addition') {
-      num1.value = Math.floor(Math.random() * 5) + 1 // 1 to 5
-      num2.value = Math.floor(Math.random() * 5) + 1 // 1 to 5
+      num1.value = Math.floor(Math.random() * 5) + 1
+      num2.value = Math.floor(Math.random() * 5) + 1
       operator.value = '➕'
     }
     else if (currentMode.value === 'hard-addition') {
-      num1.value = Math.floor(Math.random() * 10) + 1 // 1 to 10
-      num2.value = Math.floor(Math.random() * 10) + 1 // 1 to 10
+      num1.value = Math.floor(Math.random() * 10) + 1
+      num2.value = Math.floor(Math.random() * 10) + 1
       operator.value = '➕'
     }
     else if (currentMode.value === 'multiplication') {
-      num1.value = Math.floor(Math.random() * 5) + 1 // 1 to 5
-      num2.value = Math.floor(Math.random() * 3) + 1 // 1 to 3
+      num1.value = Math.floor(Math.random() * 5) + 1
+      num2.value = Math.floor(Math.random() * 3) + 1
       operator.value = '✖️'
     }
 

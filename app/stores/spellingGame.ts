@@ -1,14 +1,13 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 interface WordItem {
-  word: string // The exact Norwegian answer (e.g., "SOL")
-  emoji: string // The visual cue (e.g., "☀️")
+  word: string
+  emoji: string
 }
 
 export const useSpellingGameStore = defineStore('spellingGame', () => {
-  // 1. Core Word Database
-  const wordBank: WordItem[] = [
+  const words3Letter: WordItem[] = [
     { word: 'SOL', emoji: '☀️' },
     { word: 'BIL', emoji: '🚗' },
     { word: 'BÅT', emoji: '⛵' },
@@ -17,43 +16,99 @@ export const useSpellingGameStore = defineStore('spellingGame', () => {
     { word: 'FLY', emoji: '✈️' },
     { word: 'HUS', emoji: '🏠' },
     { word: 'BOK', emoji: '📖' },
+    { word: 'TOG', emoji: '🚂' },
+    { word: 'AND', emoji: '🦆' },
+    { word: 'EGG', emoji: '🥚' },
+    { word: 'TRE', emoji: '🌲' },
+    { word: 'HAV', emoji: '🌊' },
   ]
 
-  // 2. Active Game State
+  const words4Letter: WordItem[] = [
+    { word: 'KATT', emoji: '🐱' },
+    { word: 'HUND', emoji: '🐶' },
+    { word: 'HEST', emoji: '🐴' },
+    { word: 'GRIS', emoji: '🐷' },
+    { word: 'LØVE', emoji: '🦁' },
+    { word: 'MAUR', emoji: '🐜' },
+    { word: 'MÅNE', emoji: '🌙' },
+    { word: 'BOKS', emoji: '📦' },
+    { word: 'FISK', emoji: '🐟' },
+    { word: 'GULV', emoji: '🪵' },
+    { word: 'KAKE', emoji: '🎂' },
+    { word: 'SÅPE', emoji: '🧼' },
+    { word: 'SENG', emoji: '🛏️' },
+    { word: 'BÆSJ', emoji: '💩' },
+    { word: 'SAKS', emoji: '✂️' },
+
+  ]
+
+  const words5Letter: WordItem[] = [
+    { word: 'BLÅSE', emoji: '💨' },
+    { word: 'SKOLE', emoji: '🏫' },
+    { word: 'KUBBE', emoji: '🪵' },
+    { word: 'PRINS', emoji: '🤴' },
+    { word: 'KANIN', emoji: '🐇' },
+    { word: 'BANAN', emoji: '🍌' },
+    { word: 'ROBOT', emoji: '🤖' },
+    { word: 'SLOTT', emoji: '🏰' },
+    { word: 'KRONE', emoji: '👑' },
+    { word: 'FJELL', emoji: '⛰️' },
+  ]
+
+  const currentMode = ref<3 | 4 | 5>(3)
   const currentWordItem = ref<WordItem | null>(null)
-  const scrambledLetters = ref<string[]>([]) // The mixed up buttons she can press (e.g., ['O', 'L', 'S'])
-  const userSpelling = ref<string[]>([]) // Letters she has chosen so far (e.g., ['S'])
+  const scrambledLetters = ref<string[]>([])
+  const userSpelling = ref<string[]>([])
   const isCorrect = ref<boolean | null>(null)
   const score = ref(0)
 
-  // 3. Game Actions
+  const usedIndices3 = ref<number[]>([])
+  const usedIndices4 = ref<number[]>([])
+  const usedIndices5 = ref<number[]>([])
+
+  const activeWordBank = computed(() => {
+    return currentMode.value === 5 ? words5Letter : currentMode.value === 4 ? words4Letter : words3Letter
+  })
+
+  function setMode(mode: 3 | 4 | 5) {
+    if (currentMode.value !== mode) {
+      currentMode.value = mode
+      generateNewWord()
+    }
+  }
+
   function generateNewWord() {
     isCorrect.value = null
     userSpelling.value = []
 
-    // Grab a random word from the bank
-    const randomIndex = Math.floor(Math.random() * wordBank.length)
-    const selected = wordBank[randomIndex]
+    const bank = activeWordBank.value
+    const usedIndices = currentMode.value === 5 ? usedIndices5 : currentMode.value === 4 ? usedIndices4 : usedIndices3
 
-    // 🛡️ A quick safety guard to make TypeScript happy
+    if (usedIndices.value.length >= bank.length) {
+      usedIndices.value = []
+    }
+
+    let randomIndex: number
+    do {
+      randomIndex = Math.floor(Math.random() * bank.length)
+    } while (usedIndices.value.includes(randomIndex))
+
+    usedIndices.value.push(randomIndex)
+
+    const selected = bank[randomIndex]
     if (!selected) return
 
     currentWordItem.value = selected
 
-    // Split "SOL" into ['S', 'O', 'L'] and shuffle them randomly
     scrambledLetters.value = selected.word.split('').sort(() => Math.random() - 0.5)
   }
 
   function selectLetter(letter: string, index: number) {
     if (!currentWordItem.value || isCorrect.value === true) return
 
-    // Add letter to her spelling tray
     userSpelling.value.push(letter)
-
-    // Remove it from the available scrambled choices so she can't click it twice
     scrambledLetters.value.splice(index, 1)
 
-    // Check if she filled all the slots
     if (userSpelling.value.length === currentWordItem.value.word.length) {
       const fullAttempt = userSpelling.value.join('')
 
@@ -63,13 +118,11 @@ export const useSpellingGameStore = defineStore('spellingGame', () => {
       }
       else {
         isCorrect.value = false
-        // Trigger a reset button or auto-reset after a delay so she can try again!
       }
     }
   }
 
   function resetCurrentWord() {
-    // If she makes a mistake, put the letters back so she can retry
     if (currentWordItem.value) {
       userSpelling.value = []
       isCorrect.value = null
@@ -78,11 +131,13 @@ export const useSpellingGameStore = defineStore('spellingGame', () => {
   }
 
   return {
+    currentMode,
     currentWordItem,
     scrambledLetters,
     userSpelling,
     isCorrect,
     score,
+    setMode,
     generateNewWord,
     selectLetter,
     resetCurrentWord,
