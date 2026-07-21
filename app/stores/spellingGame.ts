@@ -114,7 +114,11 @@ export const useSpellingGameStore = defineStore('spellingGame', () => {
 
       if (fullAttempt === currentWordItem.value.word) {
         isCorrect.value = true
-        score.value += 10
+        // Dynamic points based on mode:
+        // Mode 3 (Lvl 1) = 1 point
+        // Mode 4 (Lvl 2) = 2 points
+        // Mode 5 (Lvl 3) = 3 points
+        score.value += (currentMode.value - 2)
       }
       else {
         isCorrect.value = false

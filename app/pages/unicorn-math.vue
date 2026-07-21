@@ -200,7 +200,7 @@ watch(() => game.isCorrect, (newVal) => {
               class="text-4xl md:text-6xl filter drop-shadow-sm inline-block transform-gpu"
               :class="{ 'animate-item-celebrate': game.isCorrect === true }"
             >
-              {{ game.currentMode === 'multiplication' ? '🌸' : '✨' }}
+              ✨
             </div>
           </div>
 

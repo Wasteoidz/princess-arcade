@@ -51,7 +51,17 @@ export const useUnicornMathStore = defineStore('unicornMath', () => {
     }
 
     if (chosen === correctTarget) {
-      score.value++
+    // Mode-based scoring:
+    // 'easy-addition' (Lvl 1) -> +1
+    // 'hard-addition' (Lvl 2) -> +2
+    // 'multiplication' (Lvl 3) -> +3
+      const pointsMap: Record<string, number> = {
+        'easy-addition': 1,
+        'hard-addition': 2,
+        'multiplication': 3,
+      }
+
+      score.value += pointsMap[currentMode.value] || 1
       isCorrect.value = true
       setTimeout(() => generateProblem(), 2500)
     }
